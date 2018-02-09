@@ -1,5 +1,5 @@
 var Euler = {
-	drawGrid: function (ctx, color, rows, columns) {0101010101
+	drawGrid: function (ctx, color, rows, columns) {
 		ctx.strokeStyle = color
 		var row = ctx.height/rows
 		var column = ctx.width/columns
