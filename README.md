@@ -8,6 +8,8 @@ Euler.js is a library built for HTML5 canvases. It is created and currently mana
 
 Please note that Euler is still in it's early stage and is currently not very advanced. But not for long! Currently it has some (relatively!) basic things like drawing arcs, circles and lines. But it also includes some more advanced things like drawing shapes with x amount of corners!
 
+For the following week things will be changing drastically as I will be adding everything like examples from my local computer.
+
 ## Usage
 
 Download the euler.js file and make sure it is in the same repository as your html file. Add script tag inside HTML code.
