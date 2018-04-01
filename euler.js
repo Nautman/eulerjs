@@ -84,25 +84,36 @@ var Euler = {
 		if(fillStyle) {ctx.fillStyle = fillStyle; ctx.fill()}
 		ctx.closePath()
 	},
-	drawTanLine: function(ctx, angle, circle, color) {
+	drawTanLine: function(c, x, y, radius, angle, cc, lineWidth, color) {
+		var scene = Euler.canvases[c.id] ? Euler.canvases[c.id] : Euler.scene(c), ctx = c.getContext('2d')
+		ctx.lineWidth = lineWidth ? lineWidth*scene.zoom : 1
+		ctx.strokeStyle = color ? color : 'black'
+		angle = scene.radians ? (cc ? -1 : 1)*angle : Euler.degreeToRadian(angle*(cc ? -1 : 1))
 		ctx.beginPath()
-		ctx.moveTo(Math.cos(Euler.degreeToRadian(-angle))*circle.radius + circle.x + ctx.offsetX, Math.sin(Euler.degreeToRadian(-angle))*circle.radius + circle.y + ctx.offsetY)
-		ctx.lineTo(circle.radius/(Math.cos(Euler.degreeToRadian(-angle))) + circle.x + ctx.offsetX, circle.y + ctx.offsetY)
-		ctx.strokeStyle = color
+		ctx.moveTo((Math.cos(angle)*radius + x + scene.offset.x)*scene.zoom, (Math.sin(angle)*radius + y + scene.offset.y)*scene.zoom)
+		ctx.lineTo((radius/Math.cos(angle) + x + scene.offset.x)*scene.zoom, (y + scene.offset.y)*scene.zoom)
 		ctx.stroke()
 		ctx.closePath()
 	},
-	drawSinAndCos: function (ctx, angle, circle, sinColor, cosColor) {
+	drawSinLine: function(c, x, y, radius, angle, cc, lineWidth, color) {
+		var scene = Euler.canvases[c.id] ? Euler.canvases[c.id] : Euler.scene(c), ctx = c.getContext('2d')
+		ctx.lineWidth = lineWidth ? lineWidth*scene.zoom : 1
+		ctx.strokeStyle = color ? color : 'black'
+		angle = scene.radians ? (cc ? -1 : 1)*angle : Euler.degreeToRadian(angle*(cc ? -1 : 1))
 		ctx.beginPath()
-		ctx.moveTo(Math.cos(Euler.degreeToRadian(-angle))*circle.radius + circle.x + ctx.offsetX, Math.sin(Euler.degreeToRadian(-angle))*circle.radius + circle.y + ctx.offsetY)
-		ctx.lineTo(Math.cos(Euler.degreeToRadian(-angle))*circle.radius + circle.x + ctx.offsetX, circle.y + ctx.offsetY)
-		ctx.strokeStyle = sinColor
+		ctx.moveTo((Math.cos(angle)*radius + x + scene.offset.x)*scene.zoom, (Math.sin(angle)*radius + y + scene.offset.y)*scene.zoom)
+		ctx.lineTo((Math.cos(angle)*radius + x + scene.offset.x)*scene.zoom, (y + scene.offset.y)*scene.zoom)
 		ctx.stroke()
 		ctx.closePath()
+	},
+	drawCosLine: function(c, x, y, radius, angle, cc, lineWidth, color) {
+		var scene = Euler.canvases[c.id] ? Euler.canvases[c.id] : Euler.scene(c), ctx = c.getContext('2d')
+		ctx.lineWidth = lineWidth ? lineWidth*scene.zoom : 1
+		ctx.strokeStyle = color ? color : 'black'
+		angle = scene.radians ? (cc ? -1 : 1)*angle : Euler.degreeToRadian(angle*(cc ? -1 : 1))
 		ctx.beginPath()
-		ctx.moveTo(Math.cos(Euler.degreeToRadian(-angle))*circle.radius + circle.x + ctx.offsetX, circle.y + ctx.offsetY)
-		ctx.lineTo(circle.x + ctx.offsetX, circle.y + ctx.offsetY)
-		ctx.strokeStyle = cosColor
+		ctx.moveTo((Math.cos(angle)*radius + x + scene.offset.x)*scene.zoom, (y + scene.offset.y)*scene.zoom)
+		ctx.lineTo((x + scene.offset.x)*scene.zoom, (y + scene.offset.y)*scene.zoom)
 		ctx.stroke()
 		ctx.closePath()
 	},
